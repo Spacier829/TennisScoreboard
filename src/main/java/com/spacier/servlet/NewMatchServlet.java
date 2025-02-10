@@ -1,5 +1,7 @@
 package com.spacier.servlet;
 
+import com.spacier.exception.InvalidParameterException;
+import com.spacier.util.ValidationUtil;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -17,9 +19,10 @@ public class NewMatchServlet extends HttpServlet {
 
   @Override
   protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-    String firstName = req.getParameter("firstName");
-    String secondName = req.getParameter("secondName");
+    String firstPlayerName = req.getParameter("firstPlayer");
+    String secondPlayerName = req.getParameter("secondPlayer");
+    ValidationUtil.validatePlayerNames(firstPlayerName, secondPlayerName);
 
-    req.getRequestDispatcher("match-score.jsp").forward(req, resp);
+//    req.getRequestDispatcher("match-score.jsp").forward(req, resp);
   }
 }
