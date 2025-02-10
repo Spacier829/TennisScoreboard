@@ -10,15 +10,15 @@ import jakarta.servlet.http.HttpServletResponse;
 
 import java.io.IOException;
 
-@WebFilter("/")
+@WebFilter("/*")
 public class ExceptionHandlerFilter extends HttpFilter {
   @Override
   protected void doFilter(HttpServletRequest req, HttpServletResponse res, FilterChain chain) throws IOException,
       ServletException {
     try {
       super.doFilter(req, res, chain);
-    } catch (InvalidParameterException invalidParameterException) {
-      req.setAttribute("error", invalidParameterException.getMessage());
+    } catch (InvalidParameterException e) {
+      req.setAttribute("errorMessage", e.getMessage());
       req.getRequestDispatcher("new-match.jsp").forward(req, res);
     }
   }
