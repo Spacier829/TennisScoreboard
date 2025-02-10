@@ -40,12 +40,12 @@
                     <p style="color: red;"><%= errorMessage %>
                     </p>
                     <% } %>
-                    <label class="label-player" for="playerOne">Player one</label>
+                    <label class="label-player" for="firstPlayer">Player one</label>
                     <input class="input-player" placeholder="Name" type="text" required title="Enter a name"
-                           name="playerOne" id="playerOne">
-                    <label class="label-player" for="playerTwo">Player two</label>
+                           name="firstPlayer" id="firstPlayer">
+                    <label class="label-player" for="secondPlayer">Player two</label>
                     <input class="input-player" placeholder="Name" type="text" required title="Enter a name"
-                           name="playerTwo" id="playerTwo">
+                           name="secondPlayer" id="secondPlayer">
                     <input class="form-button" type="submit" value="Start">
                 </form>
             </div>
