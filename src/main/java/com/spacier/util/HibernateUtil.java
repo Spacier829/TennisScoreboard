@@ -10,9 +10,22 @@ public class HibernateUtil {
   @Getter
   private static SessionFactory sessionFactory;
 
-  static {
-    sessionFactory =
-        new Configuration().configure().addAnnotatedClass(Player.class).addAnnotatedClass(
-            Match.class).buildSessionFactory();
+  private static SessionFactory buildSessionFactory() {
+    try {
+      return new Configuration()
+          .configure()
+          .addAnnotatedClass(Player.class)
+          .addAnnotatedClass(Match.class)
+          .buildSessionFactory();
+    } catch (Exception exception) {
+      System.err.println("SessionFactory initialization failed: " + exception);
+      throw new ExceptionInInitializerError(exception);
+    }
+  }
+
+  public static void closeSessionFactory() {
+    if (sessionFactory != null) {
+      sessionFactory.close();
+    }
   }
 }
