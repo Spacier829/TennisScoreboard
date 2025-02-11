@@ -1,4 +1,5 @@
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page contentType="text/html;charset=UTF-8" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <html>
 <head>
     <meta charset="UTF-8">
@@ -47,7 +48,7 @@
                 </thead>
                 <tbody>
                 <tr class="player1">
-                    <td class="table-text">Rafael Nadal</td>
+                    <td class="table-text">${requestScope.ongoingMatch.firstPlayer.name}</td>
                     <td class="table-text">2</td>
                     <td class="table-text">4</td>
                     <td class="table-text">40</td>
@@ -56,7 +57,7 @@
                     </td>
                 </tr>
                 <tr class="player2">
-                    <td class="table-text">Roger Federer</td>
+                    <td class="table-text">${requestScope.ongoingMatch.secondPlayer.name}</td>
                     <td class="table-text">2</td>
                     <td class="table-text">3</td>
                     <td class="table-text">15</td>
@@ -71,7 +72,8 @@
 </main>
 <footer>
     <div class="footer">
-        <p>&copy; Tennis Scoreboard, project from <a href="https://zhukovsd.github.io/java-backend-learning-course/">zhukovsd/java-backend-learning-course</a> roadmap.</p>
+        <p>&copy; Tennis Scoreboard, project from <a href="https://zhukovsd.github.io/java-backend-learning-course/">zhukovsd/java-backend-learning-course</a>
+            roadmap.</p>
     </div>
 </footer>
 </body>

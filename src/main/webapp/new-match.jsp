@@ -1,4 +1,5 @@
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ page contentType="text/html;charset=UTF-8" %>
 <html>
 <head>
     <meta charset="UTF-8">
@@ -35,11 +36,9 @@
             <div class="new-match-image"></div>
             <div class="form-container center">
                 <form action="${pageContext.request.contextPath}/new-match" method="POST">
-                    <% String errorMessage = (String) request.getAttribute("errorMessage"); %>
-                    <% if (errorMessage != null) { %>
-                    <p style="color: red;"><%= errorMessage %>
-                    </p>
-                    <% } %>
+                    <c:if test="${not empty requestScope.errorMessage}">
+                        <p style="color: red;">${requestScope.errorMessage}</p>
+                    </c:if>
                     <label class="label-player" for="firstPlayer">Player one</label>
                     <input class="input-player" placeholder="Name" type="text" required title="Enter a name"
                            name="firstPlayer" id="firstPlayer">
