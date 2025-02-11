@@ -1,6 +1,8 @@
 package com.spacier.servlet;
 
-import com.spacier.exception.InvalidParameterException;
+import com.spacier.dto.MatchScoreDto;
+import com.spacier.dto.PlayerDto;
+import com.spacier.service.OngoingMatchService;
 import com.spacier.util.ValidationUtil;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
@@ -9,9 +11,12 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
 import java.io.IOException;
+import java.util.UUID;
 
 @WebServlet("/new-match")
 public class NewMatchServlet extends HttpServlet {
+  private final OngoingMatchService ongoingMatchService = OngoingMatchService.getINSTANCE();
+
   @Override
   protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
     req.getRequestDispatcher("new-match.jsp").forward(req, resp);
@@ -23,6 +28,11 @@ public class NewMatchServlet extends HttpServlet {
     String secondPlayerName = req.getParameter("secondPlayer");
     ValidationUtil.validatePlayerNames(firstPlayerName, secondPlayerName);
 
-//    req.getRequestDispatcher("match-score.jsp").forward(req, resp);
+    PlayerDto firstPlayer = new PlayerDto(firstPlayerName);
+    PlayerDto secondPlayer = new PlayerDto(secondPlayerName);
+
+    MatchScoreDto matchScoreDto = new MatchScoreDto(firstPlayer, secondPlayer);
+    UUID uuid = ongoingMatchService.addMatch(matchScoreDto);
+    resp.sendRedirect("/match-score?uuid=" + uuid);
   }
 }
