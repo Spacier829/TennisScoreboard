@@ -1,7 +1,7 @@
 package com.spacier.servlet;
 
 import com.spacier.dto.MatchScoreDto;
-import com.spacier.dto.PlayerDto;
+import com.spacier.dto.PlayerScoreDto;
 import com.spacier.service.OngoingMatchService;
 import com.spacier.util.ValidationUtil;
 import jakarta.servlet.ServletException;
@@ -28,8 +28,8 @@ public class NewMatchServlet extends HttpServlet {
     String secondPlayerName = req.getParameter("secondPlayer");
     ValidationUtil.validatePlayerNames(firstPlayerName, secondPlayerName);
 
-    PlayerDto firstPlayer = new PlayerDto(firstPlayerName);
-    PlayerDto secondPlayer = new PlayerDto(secondPlayerName);
+    PlayerScoreDto firstPlayer = new PlayerScoreDto(firstPlayerName);
+    PlayerScoreDto secondPlayer = new PlayerScoreDto(secondPlayerName);
 
     MatchScoreDto matchScoreDto = new MatchScoreDto(firstPlayer, secondPlayer);
     UUID uuid = ongoingMatchService.addMatch(matchScoreDto);
