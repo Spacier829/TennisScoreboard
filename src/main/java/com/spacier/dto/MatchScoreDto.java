@@ -10,12 +10,10 @@ import java.util.UUID;
 @Setter
 @NoArgsConstructor
 public class MatchScoreDto {
-  private final UUID uuid = UUID.randomUUID();
-  private PlayerDto firstPlayer;
-  private PlayerDto secondPlayer;
-  private int score;
+  private PlayerScoreDto firstPlayer;
+  private PlayerScoreDto secondPlayer;
 
-  public MatchScoreDto(PlayerDto firstPlayer, PlayerDto secondPlayer) {
+  public MatchScoreDto(PlayerScoreDto firstPlayer, PlayerScoreDto secondPlayer) {
     this.firstPlayer = firstPlayer;
     this.secondPlayer = secondPlayer;
   }
