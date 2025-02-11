@@ -1,6 +1,7 @@
 package com.spacier.dao;
 
 import com.spacier.entity.Player;
+import com.spacier.exception.DataBaseException;
 import com.spacier.util.HibernateUtil;
 import lombok.Getter;
 import org.hibernate.Session;
@@ -21,8 +22,8 @@ public class PlayerDaoImpl implements Dao<Player> {
       session.persist(player);
       session.getTransaction().commit();
       return player;
-    } catch (RuntimeException e) {
-      throw new RuntimeException("Failed to add player to the database");
+    } catch (DataBaseException e) {
+      throw new DataBaseException("Failed to add player to the database");
     }
   }
 
@@ -32,8 +33,8 @@ public class PlayerDaoImpl implements Dao<Player> {
       Query<Player> query = session.createQuery(FIND_BY_NAME_HQL, Player.class);
       query.setParameter("name", name);
       return Optional.ofNullable(query.uniqueResult());
-    } catch (RuntimeException e) {
-      throw new RuntimeException("Failed to find player with name " + name);
+    } catch (DataBaseException e) {
+      throw new DataBaseException("Failed to find player with name " + name);
     }
   }
 }

@@ -1,6 +1,7 @@
 package com.spacier.dao;
 
 import com.spacier.entity.Match;
+import com.spacier.exception.DataBaseException;
 import com.spacier.util.HibernateUtil;
 import lombok.Getter;
 import org.hibernate.Session;
@@ -19,7 +20,7 @@ public class MatchDaoImpl implements Dao<Match> {
       session.getTransaction().commit();
       return match;
     } catch (RuntimeException e) {
-      throw new RuntimeException("Failed to add match to the database");
+      throw new DataBaseException("Failed to add match to the database");
     }
   }
 
