@@ -49,18 +49,18 @@
                 <tbody>
                 <tr class="player1">
                     <td class="table-text">${requestScope.ongoingMatch.firstPlayer.name}</td>
-                    <td class="table-text">2</td>
-                    <td class="table-text">4</td>
-                    <td class="table-text">40</td>
+                    <td class="table-text">${requestScope.ongoingMatch.firstPlayer.games}</td>
+                    <td class="table-text">${requestScope.ongoingMatch.firstPlayer.sets}</td>
+                    <td class="table-text">${requestScope.ongoingMatch.firstPlayer.points}</td>
                     <td class="table-text">
                         <div class="score-btn">Score</div>
                     </td>
                 </tr>
                 <tr class="player2">
                     <td class="table-text">${requestScope.ongoingMatch.secondPlayer.name}</td>
-                    <td class="table-text">2</td>
-                    <td class="table-text">3</td>
-                    <td class="table-text">15</td>
+                    <td class="table-text">${requestScope.ongoingMatch.secondPlayer.games}</td>
+                    <td class="table-text">${requestScope.ongoingMatch.secondPlayer.sets}</td>
+                    <td class="table-text">${requestScope.ongoingMatch.secondPlayer.points}</td>
                     <td class="table-text">
                         <div class="score-btn">Score</div>
                     </td>
