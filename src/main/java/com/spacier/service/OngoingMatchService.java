@@ -22,8 +22,9 @@ public class OngoingMatchService {
   }
 
   public UUID addMatch(MatchScoreDto matchScoreDto) {
-    ongoingMatches.put(matchScoreDto.getUuid(), matchScoreDto);
-    return matchScoreDto.getUuid();
+    UUID uuid = UUID.randomUUID();
+    ongoingMatches.put(uuid, matchScoreDto);
+    return uuid;
   }
 
   public void removeMatch(UUID uuid) {
