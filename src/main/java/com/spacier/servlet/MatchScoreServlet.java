@@ -21,7 +21,7 @@ public class MatchScoreServlet extends HttpServlet {
     MatchScoreDto ongoingMatch = ongoingMatchService.getMatch(uuid);
 
     req.setAttribute("ongoingMatch", ongoingMatch);
-
+    req.setAttribute("uuid", uuid);
     req.getRequestDispatcher("match-score.jsp").forward(req, resp);
   }
 
