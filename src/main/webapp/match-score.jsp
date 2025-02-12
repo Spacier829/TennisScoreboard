@@ -53,7 +53,12 @@
                     <td class="table-text">${requestScope.ongoingMatch.firstPlayer.sets}</td>
                     <td class="table-text">${requestScope.ongoingMatch.firstPlayer.points}</td>
                     <td class="table-text">
-                        <div class="score-btn">Score</div>
+                        <form action="${pageContext.request.contextPath}/match-score" method="POST">
+                            <input type="hidden" name="uuid" value="${requestScope.uuid}">
+                            <input type="hidden" name="playerName"
+                                   value="${requestScope.ongoingMatch.firstPlayer.name}">
+                            <button type="submit" class="score-btn">Score</button>
+                        </form>
                     </td>
                 </tr>
                 <tr class="player2">
@@ -62,7 +67,12 @@
                     <td class="table-text">${requestScope.ongoingMatch.secondPlayer.sets}</td>
                     <td class="table-text">${requestScope.ongoingMatch.secondPlayer.points}</td>
                     <td class="table-text">
-                        <div class="score-btn">Score</div>
+                        <form action="${pageContext.request.contextPath}/match-score" method="POST">
+                            <input type="hidden" name="uuid" value="${requestScope.uuid}">
+                            <input type="hidden" name="playerName"
+                                   value="${requestScope.ongoingMatch.secondPlayer.name}">
+                            <button type="submit" class="score-btn">Score</button>
+                        </form>
                     </td>
                 </tr>
                 </tbody>
