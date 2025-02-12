@@ -1,6 +1,7 @@
 package com.spacier.servlet;
 
 import com.spacier.dto.MatchScoreDto;
+import com.spacier.service.MatchScoreCalculationService;
 import com.spacier.service.OngoingMatchService;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
@@ -27,6 +28,14 @@ public class MatchScoreServlet extends HttpServlet {
 
   @Override
   protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+    UUID uuid = UUID.fromString(req.getParameter("uuid"));
+    String playerName = req.getParameter("playerName");
+    MatchScoreDto ongoingMatch = ongoingMatchService.getMatch(uuid);
+    MatchScoreCalculationService matchScore = new MatchScoreCalculationService(ongoingMatch);
+    matchScore.calculatePlayerScore(playerName);
 
+    req.setAttribute("ongoingMatch", ongoingMatch);
+    req.setAttribute("uuid", uuid);
+    req.getRequestDispatcher("match-score.jsp").forward(req, resp);
   }
 }
