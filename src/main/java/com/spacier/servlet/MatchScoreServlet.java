@@ -34,8 +34,7 @@ public class MatchScoreServlet extends HttpServlet {
     MatchScoreCalculationService matchScore = new MatchScoreCalculationService(ongoingMatch);
     matchScore.calculatePlayerScore(playerName);
 
-    req.setAttribute("ongoingMatch", ongoingMatch);
     req.setAttribute("uuid", uuid);
-    req.getRequestDispatcher("match-score.jsp").forward(req, resp);
+    resp.sendRedirect("/match-score?uuid=" + uuid);
   }
 }
