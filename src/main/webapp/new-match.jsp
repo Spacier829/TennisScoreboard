@@ -41,10 +41,10 @@
                     </c:if>
                     <label class="label-player" for="firstPlayer">Player one</label>
                     <input class="input-player" placeholder="Name" type="text" required title="Enter a name"
-                           name="firstPlayer" id="firstPlayer">
+                           name="firstPlayer" id="firstPlayer" value="J. Doe">
                     <label class="label-player" for="secondPlayer">Player two</label>
                     <input class="input-player" placeholder="Name" type="text" required title="Enter a name"
-                           name="secondPlayer" id="secondPlayer">
+                           name="secondPlayer" id="secondPlayer" value="J. Dane">
                     <input class="form-button" type="submit" value="Start">
                 </form>
             </div>
