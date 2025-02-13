@@ -1,6 +1,7 @@
 package com.spacier.servlet;
 
 import com.spacier.dto.MatchScoreDto;
+import com.spacier.service.FinishedMatchesPersistenceService;
 import com.spacier.service.MatchScoreCalculationService;
 import com.spacier.service.OngoingMatchService;
 import jakarta.servlet.ServletException;
@@ -15,6 +16,7 @@ import java.util.UUID;
 @WebServlet("/match-score")
 public class MatchScoreServlet extends HttpServlet {
   private final OngoingMatchService ongoingMatchService = OngoingMatchService.getINSTANCE();
+  private final FinishedMatchesPersistenceService finishedMatchesPersistenceService = FinishedMatchesPersistenceService.getINSTANCE();
 
   @Override
   protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -33,8 +35,13 @@ public class MatchScoreServlet extends HttpServlet {
     MatchScoreDto ongoingMatch = ongoingMatchService.getMatch(uuid);
     MatchScoreCalculationService matchScore = new MatchScoreCalculationService(ongoingMatch);
     matchScore.calculatePlayerScore(playerName);
-
-    req.setAttribute("uuid", uuid);
-    resp.sendRedirect("/match-score?uuid=" + uuid);
+    if (matchScore.isMatchOver()) {
+      finishedMatchesPersistenceService.save(ongoingMatch, playerName);
+      ongoingMatchService.removeMatch(uuid);
+      resp.sendRedirect("/matches");
+    } else {
+      req.setAttribute("uuid", uuid);
+      resp.sendRedirect("/match-score?uuid=" + uuid);
+    }
   }
 }
