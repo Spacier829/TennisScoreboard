@@ -1,10 +1,7 @@
 package com.spacier.entity;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 @Entity
 @Table(name = "Players")
@@ -20,6 +17,11 @@ public class Player {
 
   @Column(name = "name", nullable = false, unique = true, length = 50)
   private String name;
+
+  @Builder
+  public Player(String name){
+    this.name = name;
+  }
 
   @Override
   public String toString() {

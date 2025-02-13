@@ -1,10 +1,7 @@
 package com.spacier.entity;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 import org.hibernate.annotations.Cascade;
 
 @Entity
@@ -31,6 +28,13 @@ public class Match {
   @ManyToOne
   @JoinColumn(name = "winner", referencedColumnName = "id", nullable = false)
   private Player winner;
+
+  @Builder
+  public Match(Player firstPlayer, Player secondPlayer, Player winner) {
+    this.firstPlayer = firstPlayer;
+    this.secondPlayer = secondPlayer;
+    this.winner = winner;
+  }
 
   @Override
   public String toString() {
