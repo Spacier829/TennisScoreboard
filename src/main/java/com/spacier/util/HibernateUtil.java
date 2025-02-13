@@ -2,14 +2,10 @@ package com.spacier.util;
 
 import com.spacier.entity.Match;
 import com.spacier.entity.Player;
-import lombok.Getter;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
 
 public class HibernateUtil {
-  @Getter
-  private static SessionFactory sessionFactory;
-
   private static SessionFactory buildSessionFactory() {
     try {
       return new Configuration()
@@ -23,9 +19,7 @@ public class HibernateUtil {
     }
   }
 
-  public static void closeSessionFactory() {
-    if (sessionFactory != null) {
-      sessionFactory.close();
-    }
+  public static SessionFactory getSessionFactory() {
+    return buildSessionFactory();
   }
 }
