@@ -49,9 +49,26 @@
                 <tbody>
                 <tr class="player1">
                     <td class="table-text">${requestScope.ongoingMatch.firstPlayer.name}</td>
-                    <td class="table-text">${requestScope.ongoingMatch.firstPlayer.games}</td>
                     <td class="table-text">${requestScope.ongoingMatch.firstPlayer.sets}</td>
-                    <td class="table-text">${requestScope.ongoingMatch.firstPlayer.points}</td>
+                    <td class="table-text">${requestScope.ongoingMatch.firstPlayer.games}</td>
+                    <td class="table-text">
+                        <c:choose>
+                            <c:when test="${requestScope.ongoingMatch.firstPlayer.games == 6 &&
+                            requestScope.ongoingMatch.secondPlayer.games == 6}">
+                                ${requestScope.ongoingMatch.firstPlayer.points}
+                            </c:when>
+                            <c:otherwise>
+                                <c:choose>
+                                    <c:when test="${requestScope.ongoingMatch.firstPlayer.points == 0}">0</c:when>
+                                    <c:when test="${requestScope.ongoingMatch.firstPlayer.points == 1}">15</c:when>
+                                    <c:when test="${requestScope.ongoingMatch.firstPlayer.points == 2}">30</c:when>
+                                    <c:when test="${requestScope.ongoingMatch.firstPlayer.points == 3}">40</c:when>
+                                    <c:when test="${requestScope.ongoingMatch.firstPlayer.points == 4}">AD</c:when>
+                                    <c:otherwise>${requestScope.ongoingMatch.firstPlayer.points}</c:otherwise>
+                                </c:choose>
+                            </c:otherwise>
+                        </c:choose>
+                    </td>
                     <td class="table-text">
                         <form action="${pageContext.request.contextPath}/match-score" method="POST">
                             <input type="hidden" name="uuid" value="${requestScope.uuid}">
@@ -63,9 +80,26 @@
                 </tr>
                 <tr class="player2">
                     <td class="table-text">${requestScope.ongoingMatch.secondPlayer.name}</td>
-                    <td class="table-text">${requestScope.ongoingMatch.secondPlayer.games}</td>
                     <td class="table-text">${requestScope.ongoingMatch.secondPlayer.sets}</td>
-                    <td class="table-text">${requestScope.ongoingMatch.secondPlayer.points}</td>
+                    <td class="table-text">${requestScope.ongoingMatch.secondPlayer.games}</td>
+                    <td class="table-text">
+                        <c:choose>
+                            <c:when test="${requestScope.ongoingMatch.firstPlayer.games == 6 &&
+                            requestScope.ongoingMatch.secondPlayer.games == 6}">
+                                ${requestScope.ongoingMatch.secondPlayer.points}
+                            </c:when>
+                            <c:otherwise>
+                                <c:choose>
+                                    <c:when test="${requestScope.ongoingMatch.secondPlayer.points == 0}">0</c:when>
+                                    <c:when test="${requestScope.ongoingMatch.secondPlayer.points == 1}">15</c:when>
+                                    <c:when test="${requestScope.ongoingMatch.secondPlayer.points == 2}">30</c:when>
+                                    <c:when test="${requestScope.ongoingMatch.secondPlayer.points == 3}">40</c:when>
+                                    <c:when test="${requestScope.ongoingMatch.secondPlayer.points == 4}">AD</c:when>
+                                    <c:otherwise>${requestScope.ongoingMatch.secondPlayer.points}</c:otherwise>
+                                </c:choose>
+                            </c:otherwise>
+                        </c:choose>
+                    </td>
                     <td class="table-text">
                         <form action="${pageContext.request.contextPath}/match-score" method="POST">
                             <input type="hidden" name="uuid" value="${requestScope.uuid}">
