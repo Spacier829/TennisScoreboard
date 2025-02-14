@@ -2,13 +2,17 @@ package com.spacier.util;
 
 import com.spacier.entity.Match;
 import com.spacier.entity.Player;
+import lombok.Getter;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
 
 public class HibernateUtil {
-  private static SessionFactory buildSessionFactory() {
+  @Getter
+  private static final SessionFactory sessionFactory;
+
+  static {
     try {
-      return new Configuration()
+      sessionFactory = new Configuration()
           .configure()
           .addAnnotatedClass(Player.class)
           .addAnnotatedClass(Match.class)
@@ -17,9 +21,5 @@ public class HibernateUtil {
       System.err.println("SessionFactory initialization failed: " + exception);
       throw new ExceptionInInitializerError(exception);
     }
-  }
-
-  public static SessionFactory getSessionFactory() {
-    return buildSessionFactory();
   }
 }
