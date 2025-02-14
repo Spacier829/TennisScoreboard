@@ -3,17 +3,19 @@ package com.spacier.dao;
 import com.spacier.entity.Player;
 import com.spacier.exception.DataBaseException;
 import com.spacier.util.HibernateUtil;
-import lombok.Getter;
 import org.hibernate.Session;
 import org.hibernate.query.Query;
 
 import java.util.Optional;
 
 public class PlayerDaoImpl implements Dao<Player> {
-  @Getter
   private static final PlayerDaoImpl INSTANCE = new PlayerDaoImpl();
 
   private static final String FIND_BY_NAME_HQL = "FROM Player WHERE name = :name";
+
+  public static PlayerDaoImpl getInstance() {
+    return INSTANCE;
+  }
 
   @Override
   public Player add(Player player) {

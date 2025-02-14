@@ -3,14 +3,16 @@ package com.spacier.dao;
 import com.spacier.entity.Match;
 import com.spacier.exception.DataBaseException;
 import com.spacier.util.HibernateUtil;
-import lombok.Getter;
 import org.hibernate.Session;
 
 import java.util.Optional;
 
 public class MatchDaoImpl implements Dao<Match> {
-  @Getter
   private static final MatchDaoImpl INSTANCE = new MatchDaoImpl();
+
+  public static MatchDaoImpl getInstance() {
+    return INSTANCE;
+  }
 
   @Override
   public Match add(Match match) {
