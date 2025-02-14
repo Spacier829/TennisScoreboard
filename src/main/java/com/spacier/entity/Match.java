@@ -2,7 +2,6 @@ package com.spacier.entity;
 
 import jakarta.persistence.*;
 import lombok.*;
-import org.hibernate.annotations.Cascade;
 
 @Entity
 @Table(name = "Matches")
@@ -16,13 +15,11 @@ public class Match {
   private Long id;
 
   @ManyToOne
-  @Cascade(org.hibernate.annotations.CascadeType.PERSIST)
   @JoinColumn(name = "first_player", referencedColumnName = "id", nullable = false)
   private Player firstPlayer;
 
   @ManyToOne
   @JoinColumn(name = "second_player", referencedColumnName = "id", nullable = false)
-  @Cascade(org.hibernate.annotations.CascadeType.PERSIST)
   private Player secondPlayer;
 
   @ManyToOne
