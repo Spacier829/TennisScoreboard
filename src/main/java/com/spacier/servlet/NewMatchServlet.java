@@ -15,7 +15,7 @@ import java.util.UUID;
 
 @WebServlet("/new-match")
 public class NewMatchServlet extends HttpServlet {
-  private final OngoingMatchService ongoingMatchService = OngoingMatchService.getINSTANCE();
+  private final OngoingMatchService ongoingMatchService = OngoingMatchService.getInstance();
 
   @Override
   protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
