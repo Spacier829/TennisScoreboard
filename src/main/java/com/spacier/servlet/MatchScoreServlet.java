@@ -37,7 +37,7 @@ public class MatchScoreServlet extends HttpServlet {
     MatchScoreCalculationService matchScore = new MatchScoreCalculationService(ongoingMatch);
     matchScore.calculatePlayerScore(playerName);
     if (matchScore.isMatchOver()) {
-      finishedMatchesPersistenceService.save(ongoingMatch, playerName);
+      finishedMatchesPersistenceService.saveMatch(ongoingMatch, playerName);
       ongoingMatchService.removeMatch(uuid);
       resp.sendRedirect("/matches");
     } else {
