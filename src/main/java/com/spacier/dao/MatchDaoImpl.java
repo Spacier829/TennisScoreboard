@@ -5,6 +5,7 @@ import com.spacier.exception.DataBaseException;
 import com.spacier.util.HibernateUtil;
 import org.hibernate.Session;
 
+import java.util.List;
 import java.util.Optional;
 
 public class MatchDaoImpl implements Dao<Match> {
@@ -29,5 +30,13 @@ public class MatchDaoImpl implements Dao<Match> {
   @Override
   public Optional<Match> findByName(String name) {
     return Optional.empty();
+  }
+
+  public List<Match> findAll() {
+    try (Session session = HibernateUtil.getSessionFactory().openSession()) {
+      return session.createQuery("from Match", Match.class).getResultList();
+    } catch (DataBaseException e) {
+      throw new DataBaseException("Failed to find matches from the database");
+    }
   }
 }
