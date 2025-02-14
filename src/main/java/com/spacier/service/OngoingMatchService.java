@@ -2,7 +2,6 @@ package com.spacier.service;
 
 import com.spacier.dto.MatchScoreDto;
 import com.spacier.exception.NotFoundException;
-import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import java.util.HashMap;
@@ -12,10 +11,12 @@ import java.util.UUID;
 
 @NoArgsConstructor
 public class OngoingMatchService {
-  @Getter
   private static final OngoingMatchService INSTANCE = new OngoingMatchService();
-
   private static final Map<UUID, MatchScoreDto> ongoingMatches = new HashMap<>();
+
+  public static OngoingMatchService getInstance() {
+    return INSTANCE;
+  }
 
   public MatchScoreDto getMatch(UUID uuid) {
     return Optional.ofNullable(ongoingMatches.get(uuid)).orElseThrow(() -> new NotFoundException("UUID not found"));

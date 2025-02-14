@@ -4,12 +4,14 @@ import com.spacier.dao.MatchDaoImpl;
 import com.spacier.dto.MatchScoreDto;
 import com.spacier.entity.Match;
 import com.spacier.entity.Player;
-import lombok.Getter;
 
 public class FinishedMatchesPersistenceService {
-  @Getter
-  public static final FinishedMatchesPersistenceService INSTANCE = new FinishedMatchesPersistenceService();
-  public static final MatchDaoImpl matchDao = MatchDaoImpl.getINSTANCE();
+  private static final FinishedMatchesPersistenceService INSTANCE = new FinishedMatchesPersistenceService();
+  private static final MatchDaoImpl matchDao = MatchDaoImpl.getInstance();
+
+  public static FinishedMatchesPersistenceService getInstance() {
+    return INSTANCE;
+  }
 
   public void save(MatchScoreDto match, String winnerName) {
     Player firstPlayer = Player
