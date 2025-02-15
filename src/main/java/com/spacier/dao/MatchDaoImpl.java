@@ -39,4 +39,21 @@ public class MatchDaoImpl implements Dao<Match> {
       throw new DataBaseException("Failed to find matches from the database");
     }
   }
+
+  public List<Match> findAllWithPagination(int page, int size) {
+    try (Session session = HibernateUtil.getSessionFactory().openSession()) {
+      return session.createQuery("from Match", Match.class).setFirstResult((page - 1) * size).setMaxResults(
+          size).list();
+    } catch (DataBaseException e) {
+      throw new DataBaseException("Failed to find matches from the database");
+    }
+  }
+
+  public long getCountMatches(){
+    try (Session session = HibernateUtil.getSessionFactory().openSession()) {
+      return session.createQuery("SELECT COUNT(m) from Match m", Long.class).uniqueResult();
+    } catch (DataBaseException e) {
+      throw new DataBaseException("Failed to find matches from the database");
+    }
+  }
 }
