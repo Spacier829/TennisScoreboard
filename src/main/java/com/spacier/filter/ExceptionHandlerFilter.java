@@ -1,6 +1,7 @@
 package com.spacier.filter;
 
 import com.spacier.exception.InvalidParameterException;
+import com.spacier.exception.NotFoundException;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebFilter;
@@ -19,7 +20,17 @@ public class ExceptionHandlerFilter extends HttpFilter {
       super.doFilter(req, res, chain);
     } catch (InvalidParameterException e) {
       req.setAttribute("errorMessage", e.getMessage());
-      req.getRequestDispatcher("new-match.jsp").forward(req, res);
+      String currentPage = req.getServletPath();
+      if (currentPage.equals("/new-match")) {
+        req.getRequestDispatcher("new-match.jsp").forward(req, res);
+      } else if (currentPage.equals("/matches")) {
+        req.getRequestDispatcher("matches.jsp").forward(req, res);
+      } else {
+        req.getRequestDispatcher("error.jsp").forward(req, res);
+      }
+    } catch (NotFoundException e) {
+      req.setAttribute("errorMessage", e.getMessage());
+      req.getRequestDispatcher("matches.jsp").forward(req, res);
     }
   }
 }
