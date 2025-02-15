@@ -32,15 +32,21 @@
 </header>
 <main>
     <div class="container">
+        <c:if test="${not empty requestScope.errorMessage}">
+            <p style="color: red;">${requestScope.errorMessage}</p>
+        </c:if>
         <h1>Matches</h1>
         <div class="input-container">
-            <input class="input-filter" placeholder="Filter by name" type="text"/>
-            <div>
-                <a href="#">
-                    <button class="btn-filter">Reset Filter</button>
-                </a>
-            </div>
+            <form action="${pageContext.request.contextPath}/matches" method="GET">
+                <input class="input-filter" placeholder="Filter by name" type="text" name="filter_by_player_name"/>
+                <div>
+                    <a href="#">
+                        <button class="btn-filter">Reset Filter</button>
+                    </a>
+                </div>
+            </form>
         </div>
+
 
         <table class="table-matches">
             <tr>
@@ -57,13 +63,45 @@
             </c:forEach>
         </table>
 
-        <div class="pagination">
-            <a class="prev" href="#"> < </a>
-            <a class="num-page current" href="#">1</a>
-            <a class="num-page" href="#">2</a>
-            <a class="num-page" href="#">3</a>
-            <a class="next" href="#"> > </a>
-        </div>
+        <c:if test="${requestScope.totalPages > 0}">
+            <div class="pagination">
+                <c:if test="${requestScope.currentPage > 1}">
+                    <a class="prev" href="?page=${requestScope.currentPage - 1}"> < </a>
+                </c:if>
+
+                <c:set var="startPage" value="${requestScope.currentPage - 1}"/>
+                <c:set var="endPage" value="${requestScope.currentPage + 1}"/>
+
+                <c:if test="${startPage < 1}">
+                    <c:set var="startPage" value="1"/>
+                    <c:set var="endPage" value="3"/>
+                </c:if>
+
+                <c:if test="${endPage > requestScope.totalPages}">
+                    <c:set var="endPage" value="${requestScope.totalPages}"/>
+                    <c:set var="startPage" value="${endPage - 2}"/>
+                </c:if>
+
+                <c:if test="${startPage < 1}">
+                    <c:set var="startPage" value="1"/>
+                </c:if>
+
+                <c:forEach var="i" begin="${startPage}" end="${endPage}">
+                    <c:choose>
+                        <c:when test="${i == requestScope.currentPage}">
+                            <a class="num-page current" href="#">${i}</a>
+                        </c:when>
+                        <c:otherwise>
+                            <a class="num-page" href="?page=${i}">${i}</a>
+                        </c:otherwise>
+                    </c:choose>
+                </c:forEach>
+
+                <c:if test="${requestScope.currentPage < requestScope.totalPages}">
+                    <a class="next" href="?page=${requestScope.currentPage + 1}"> > </a>
+                </c:if>
+            </div>
+        </c:if>
     </div>
 </main>
 <footer>
