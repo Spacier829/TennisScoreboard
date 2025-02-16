@@ -8,8 +8,9 @@ import java.util.List;
 
 public class MatchPaginationService {
   private static final MatchPaginationService INSTANCE = new MatchPaginationService();
-  private static final MatchDaoImpl matchDao = MatchDaoImpl.getInstance();
   private static final int MAX_PAGE_SIZE = 5;
+
+  private static final MatchDaoImpl matchDao = MatchDaoImpl.getInstance();
 
   public static MatchPaginationService getInstance() {
     return INSTANCE;

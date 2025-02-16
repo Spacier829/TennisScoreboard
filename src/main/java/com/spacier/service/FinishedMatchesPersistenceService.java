@@ -9,7 +9,7 @@ import com.spacier.entity.Player;
 
 public class FinishedMatchesPersistenceService {
   private static final FinishedMatchesPersistenceService INSTANCE = new FinishedMatchesPersistenceService();
-  
+
   private static final MatchDaoImpl matchDao = MatchDaoImpl.getInstance();
   private static final PlayerDaoImpl playerDao = PlayerDaoImpl.getInstance();
 
