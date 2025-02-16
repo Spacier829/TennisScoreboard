@@ -39,11 +39,7 @@
         <div class="input-container">
             <form action="${pageContext.request.contextPath}/matches" method="GET">
                 <input class="input-filter" placeholder="Filter by name" type="text" name="filter_by_player_name"/>
-                <div>
-                    <a href="#">
-                        <button class="btn-filter">Reset Filter</button>
-                    </a>
-                </div>
+                <button class="btn-filter">Reset Filter</button>
             </form>
         </div>
 
