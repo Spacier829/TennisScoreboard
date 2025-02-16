@@ -1,6 +1,5 @@
 package com.spacier.servlet;
 
-import com.spacier.dao.MatchDaoImpl;
 import com.spacier.entity.Match;
 import com.spacier.service.MatchPaginationService;
 import com.spacier.util.ValidationUtil;
@@ -44,9 +43,5 @@ public class MatchesServlet extends HttpServlet {
     req.setAttribute("currentPage", page);
     req.setAttribute("totalPages", totalPages);
     req.getRequestDispatcher("matches.jsp").forward(req, resp);
-  }
-
-  @Override
-  protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
   }
 }
