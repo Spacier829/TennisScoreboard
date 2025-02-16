@@ -10,12 +10,11 @@ import java.util.Optional;
 
 public class MatchDaoImpl implements Dao<Match> {
   private static final MatchDaoImpl INSTANCE = new MatchDaoImpl();
+
   private static final String SELECT_ALL_HQL = "from Match";
   private static final String COUNT_HQL = "SELECT COUNT(m) from Match m";
-  private static final String SELECT_BY_NAME_HQL = "FROM Match m WHERE m.firstPlayer.name = " +
-                                                   ":name " +
-                                                   "OR m" +
-                                                   ".secondPlayer.name = :name";
+  private static final String SELECT_BY_NAME_HQL = "FROM Match m WHERE m.firstPlayer.name = :name " +
+                                                   "OR m.secondPlayer.name = :name";
   private static final String COUNT_BY_NAME_HQL = "SELECT COUNT(m)" + SELECT_BY_NAME_HQL;
 
   public static MatchDaoImpl getInstance() {
