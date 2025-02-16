@@ -17,7 +17,7 @@ public class ExceptionHandlerFilter extends HttpFilter {
   protected void doFilter(HttpServletRequest req, HttpServletResponse res, FilterChain chain) throws IOException,
       ServletException {
     try {
-      super.doFilter(req, res, chain);
+      chain.doFilter(req, res);
     } catch (InvalidParameterException e) {
       req.setAttribute("errorMessage", e.getMessage());
       String currentPage = req.getServletPath();
@@ -30,7 +30,15 @@ public class ExceptionHandlerFilter extends HttpFilter {
       }
     } catch (NotFoundException e) {
       req.setAttribute("errorMessage", e.getMessage());
-      req.getRequestDispatcher("matches.jsp").forward(req, res);
+      String currentPage = req.getServletPath();
+      if (currentPage.equals("/matches")) {
+        req.getRequestDispatcher("matches.jsp").forward(req, res);
+      } else {
+        req.getRequestDispatcher("error.jsp").forward(req, res);
+      }
+    } catch (Exception e) {
+      req.setAttribute("errorMessage", e.getMessage());
+      req.getRequestDispatcher("error.jsp").forward(req, res);
     }
   }
 }
