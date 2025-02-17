@@ -39,10 +39,10 @@ public class MatchScoreServlet extends HttpServlet {
     if (matchScore.isMatchOver()) {
       finishedMatchesPersistenceService.saveMatch(ongoingMatch, playerName);
       ongoingMatchService.removeMatch(uuid);
-      resp.sendRedirect("/matches");
+      resp.sendRedirect(req.getContextPath() + "/matches");
     } else {
       req.setAttribute("uuid", uuid);
-      resp.sendRedirect("/match-score?uuid=" + uuid);
+      resp.sendRedirect(req.getContextPath() + "/match-score?uuid=" + uuid);
     }
   }
 }

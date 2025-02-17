@@ -33,6 +33,6 @@ public class NewMatchServlet extends HttpServlet {
 
     MatchScoreDto matchScoreDto = new MatchScoreDto(firstPlayer, secondPlayer);
     UUID uuid = ongoingMatchService.addMatch(matchScoreDto);
-    resp.sendRedirect("/match-score?uuid=" + uuid);
+    resp.sendRedirect(req.getContextPath() + "/match-score?uuid=" + uuid);
   }
 }
