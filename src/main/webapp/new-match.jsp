@@ -40,11 +40,13 @@
                         <p style="color: red;">${requestScope.errorMessage}</p>
                     </c:if>
                     <label class="label-player" for="firstPlayer">Player one</label>
-                    <input class="input-player" placeholder="Name" type="text" required title="Enter a name"
-                           name="firstPlayer" id="firstPlayer" value="J. Doe">
+                    <input class="input-player" placeholder="J. Doe" type="text" required
+                           title="Enter a name like J. Doe"
+                           name="firstPlayer" id="firstPlayer">
                     <label class="label-player" for="secondPlayer">Player two</label>
-                    <input class="input-player" placeholder="Name" type="text" required title="Enter a name"
-                           name="secondPlayer" id="secondPlayer" value="J. Dane">
+                    <input class="input-player" placeholder="J. Dane" type="text" required
+                           title="Enter a name like J. Dane"
+                           name="secondPlayer" id="secondPlayer">
                     <input class="form-button" type="submit" value="Start">
                 </form>
             </div>
